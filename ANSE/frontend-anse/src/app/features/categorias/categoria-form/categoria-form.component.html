@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>{{ isEdit ? '✏️ Editar Categoría' : '➕ Nueva Categoría' }}</h2>
+  
+    <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label for="nombre">Nombre *</label>
+        <input
+          id="nombre"
+          type="text"
+          formControlName="nombre"
+          placeholder="Ej: Carga Refrigerada"
+          class="form-control"
+          [class.is-invalid]="categoriaForm.get('nombre')?.invalid && categoriaForm.get('nombre')?.touched"
+        />
+        <div class="error-message" *ngIf="categoriaForm.get('nombre')?.invalid && categoriaForm.get('nombre')?.touched">
+          <span *ngIf="categoriaForm.get('nombre')?.errors?.['required']">El nombre es obligatorio.</span>
+          <span *ngIf="categoriaForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</span>
+          <span *ngIf="categoriaForm.get('nombre')?.errors?.['maxlength']">El nombre no puede superar los 100 caracteres.</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          formControlName="descripcion"
+          placeholder="Descripción detallada de la categoría..."
+          class="form-control"
+          rows="4"
+        ></textarea>
+        <div class="error-message" *ngIf="categoriaForm.get('descripcion')?.invalid && categoriaForm.get('descripcion')?.touched">
+          <span *ngIf="categoriaForm.get('descripcion')?.errors?.['maxlength']">La descripción no puede superar los 500 caracteres.</span>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="categoriaForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,164 @@
+<div class="container">
+    <h2>{{ isEdit ? '✏️ Editar Servicio' : '➕ Nuevo Servicio' }}</h2>
+  
+    <form [formGroup]="servicioForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="clienteId">ID Cliente *</label>
+          <input
+            id="clienteId"
+            type="number"
+            formControlName="clienteId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('clienteId')?.invalid && servicioForm.get('clienteId')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('clienteId')?.invalid && servicioForm.get('clienteId')?.touched">
+            <span *ngIf="servicioForm.get('clienteId')?.errors?.['required']">El ID del cliente es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="categoriaId">ID Categoría *</label>
+          <input
+            id="categoriaId"
+            type="number"
+            formControlName="categoriaId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('categoriaId')?.invalid && servicioForm.get('categoriaId')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('categoriaId')?.invalid && servicioForm.get('categoriaId')?.touched">
+            <span *ngIf="servicioForm.get('categoriaId')?.errors?.['required']">El ID de la categoría es obligatorio.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="rutaId">ID Ruta *</label>
+          <input
+            id="rutaId"
+            type="number"
+            formControlName="rutaId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('rutaId')?.invalid && servicioForm.get('rutaId')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('rutaId')?.invalid && servicioForm.get('rutaId')?.touched">
+            <span *ngIf="servicioForm.get('rutaId')?.errors?.['required']">El ID de la ruta es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="conductorId">ID Conductor *</label>
+          <input
+            id="conductorId"
+            type="number"
+            formControlName="conductorId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('conductorId')?.invalid && servicioForm.get('conductorId')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('conductorId')?.invalid && servicioForm.get('conductorId')?.touched">
+            <span *ngIf="servicioForm.get('conductorId')?.errors?.['required']">El ID del conductor es obligatorio.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="vehiculoId">ID Vehículo *</label>
+          <input
+            id="vehiculoId"
+            type="number"
+            formControlName="vehiculoId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('vehiculoId')?.invalid && servicioForm.get('vehiculoId')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('vehiculoId')?.invalid && servicioForm.get('vehiculoId')?.touched">
+            <span *ngIf="servicioForm.get('vehiculoId')?.errors?.['required']">El ID del vehículo es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="costo">Costo (S/) *</label>
+          <input
+            id="costo"
+            type="number"
+            step="0.01"
+            formControlName="costo"
+            placeholder="1500.00"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('costo')?.invalid && servicioForm.get('costo')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('costo')?.invalid && servicioForm.get('costo')?.touched">
+            <span *ngIf="servicioForm.get('costo')?.errors?.['required']">El costo es obligatorio.</span>
+            <span *ngIf="servicioForm.get('costo')?.errors?.['min']">El costo debe ser mayor a 0.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="fechaServicio">Fecha del Servicio *</label>
+          <input
+            id="fechaServicio"
+            type="date"
+            formControlName="fechaServicio"
+            class="form-control"
+            [class.is-invalid]="servicioForm.get('fechaServicio')?.invalid && servicioForm.get('fechaServicio')?.touched"
+          />
+          <div class="error-message" *ngIf="servicioForm.get('fechaServicio')?.invalid && servicioForm.get('fechaServicio')?.touched">
+            <span *ngIf="servicioForm.get('fechaServicio')?.errors?.['required']">La fecha es obligatoria.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="estado">Estado *</label>
+          <select id="estado" formControlName="estado" class="form-control">
+            <option value="Programado">Programado</option>
+            <option value="En Tránsito">En Tránsito</option>
+            <option value="Completado">Completado</option>
+            <option value="Cancelado">Cancelado</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="horaInicio">Hora Inicio</label>
+          <input
+            id="horaInicio"
+            type="time"
+            formControlName="horaInicio"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group half">
+          <label for="horaFin">Hora Fin</label>
+          <input
+            id="horaFin"
+            type="time"
+            formControlName="horaFin"
+            class="form-control"
+          />
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="observaciones">Observaciones</label>
+        <textarea
+          id="observaciones"
+          formControlName="observaciones"
+          placeholder="Detalles adicionales del servicio..."
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+  
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="servicioForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>

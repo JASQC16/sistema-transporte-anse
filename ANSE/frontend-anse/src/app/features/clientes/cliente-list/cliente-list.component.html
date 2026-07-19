@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="header">
+      <h2>👥 Clientes</h2>
+      <a *ngIf="isAdmin" routerLink="/clientes/nuevo" class="btn-primary">+ Nuevo Cliente</a>
+    </div>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Razón Social</th>
+            <th>RUC/DNI</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of clientes">
+            <td>{{ c.id }}</td>
+            <td><strong>{{ c.razonSocial }}</strong></td>
+            <td>{{ c.rucDni }}</td>
+            <td>{{ c.telefono || '-' }}</td>
+            <td>{{ c.correo || '-' }}</td>
+            <td>{{ c.direccion }}</td>
+            <td class="actions-cell">
+              <a *ngIf="isAdmin" [routerLink]="['/clientes/editar', c.id]" class="btn-edit">✏️ Editar</a>
+              <button *ngIf="isAdmin" class="btn-delete" (click)="eliminar(c.id)">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

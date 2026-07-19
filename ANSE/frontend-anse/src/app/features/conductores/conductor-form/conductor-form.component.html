@@ -1,0 +1,98 @@
+<div class="container">
+    <h2>{{ isEdit ? '✏️ Editar Conductor' : '➕ Nuevo Conductor' }}</h2>
+  
+    <form [formGroup]="conductorForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="nombres">Nombres *</label>
+          <input
+            id="nombres"
+            type="text"
+            formControlName="nombres"
+            placeholder="Nombres del conductor"
+            class="form-control"
+            [class.is-invalid]="conductorForm.get('nombres')?.invalid && conductorForm.get('nombres')?.touched"
+          />
+          <div class="error-message" *ngIf="conductorForm.get('nombres')?.invalid && conductorForm.get('nombres')?.touched">
+            <span *ngIf="conductorForm.get('nombres')?.errors?.['required']">Los nombres son obligatorios.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="apellidos">Apellidos *</label>
+          <input
+            id="apellidos"
+            type="text"
+            formControlName="apellidos"
+            placeholder="Apellidos del conductor"
+            class="form-control"
+            [class.is-invalid]="conductorForm.get('apellidos')?.invalid && conductorForm.get('apellidos')?.touched"
+          />
+          <div class="error-message" *ngIf="conductorForm.get('apellidos')?.invalid && conductorForm.get('apellidos')?.touched">
+            <span *ngIf="conductorForm.get('apellidos')?.errors?.['required']">Los apellidos son obligatorios.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="licencia">Número de Licencia *</label>
+          <input
+            id="licencia"
+            type="text"
+            formControlName="licencia"
+            placeholder="L12345678"
+            class="form-control"
+            [class.is-invalid]="conductorForm.get('licencia')?.invalid && conductorForm.get('licencia')?.touched"
+          />
+          <div class="error-message" *ngIf="conductorForm.get('licencia')?.invalid && conductorForm.get('licencia')?.touched">
+            <span *ngIf="conductorForm.get('licencia')?.errors?.['required']">El número de licencia es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="telefono">Teléfono *</label>
+          <input
+            id="telefono"
+            type="text"
+            formControlName="telefono"
+            placeholder="Número de contacto"
+            class="form-control"
+            [class.is-invalid]="conductorForm.get('telefono')?.invalid && conductorForm.get('telefono')?.touched"
+          />
+          <div class="error-message" *ngIf="conductorForm.get('telefono')?.invalid && conductorForm.get('telefono')?.touched">
+            <span *ngIf="conductorForm.get('telefono')?.errors?.['required']">El teléfono es obligatorio.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="categoriaLicencia">Categoría de Licencia *</label>
+          <input
+            id="categoriaLicencia"
+            type="text"
+            formControlName="categoriaLicencia"
+            placeholder="A-IIIc, A-IIb, etc."
+            class="form-control"
+            [class.is-invalid]="conductorForm.get('categoriaLicencia')?.invalid && conductorForm.get('categoriaLicencia')?.touched"
+          />
+          <div class="error-message" *ngIf="conductorForm.get('categoriaLicencia')?.invalid && conductorForm.get('categoriaLicencia')?.touched">
+            <span *ngIf="conductorForm.get('categoriaLicencia')?.errors?.['required']">La categoría es obligatoria.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="estado">Estado</label>
+          <select id="estado" formControlName="estado" class="form-control">
+            <option [value]="true">Activo</option>
+            <option [value]="false">Inactivo</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="conductorForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>

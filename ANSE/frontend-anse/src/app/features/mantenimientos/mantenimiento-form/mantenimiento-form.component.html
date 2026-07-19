@@ -1,0 +1,106 @@
+<div class="container">
+    <h2>{{ isEdit ? '✏️ Editar Mantenimiento' : '➕ Nuevo Mantenimiento' }}</h2>
+  
+    <form [formGroup]="mantenimientoForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="vehiculoId">ID Vehículo *</label>
+          <input
+            id="vehiculoId"
+            type="number"
+            formControlName="vehiculoId"
+            placeholder="Ej: 1"
+            class="form-control"
+            [class.is-invalid]="mantenimientoForm.get('vehiculoId')?.invalid && mantenimientoForm.get('vehiculoId')?.touched"
+          />
+          <div class="error-message" *ngIf="mantenimientoForm.get('vehiculoId')?.invalid && mantenimientoForm.get('vehiculoId')?.touched">
+            <span *ngIf="mantenimientoForm.get('vehiculoId')?.errors?.['required']">El ID del vehículo es obligatorio.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="fecha">Fecha *</label>
+          <input
+            id="fecha"
+            type="date"
+            formControlName="fecha"
+            class="form-control"
+            [class.is-invalid]="mantenimientoForm.get('fecha')?.invalid && mantenimientoForm.get('fecha')?.touched"
+          />
+          <div class="error-message" *ngIf="mantenimientoForm.get('fecha')?.invalid && mantenimientoForm.get('fecha')?.touched">
+            <span *ngIf="mantenimientoForm.get('fecha')?.errors?.['required']">La fecha es obligatoria.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="costo">Costo (S/) *</label>
+          <input
+            id="costo"
+            type="number"
+            step="0.01"
+            formControlName="costo"
+            placeholder="3500.00"
+            class="form-control"
+            [class.is-invalid]="mantenimientoForm.get('costo')?.invalid && mantenimientoForm.get('costo')?.touched"
+          />
+          <div class="error-message" *ngIf="mantenimientoForm.get('costo')?.invalid && mantenimientoForm.get('costo')?.touched">
+            <span *ngIf="mantenimientoForm.get('costo')?.errors?.['required']">El costo es obligatorio.</span>
+            <span *ngIf="mantenimientoForm.get('costo')?.errors?.['min']">El costo debe ser mayor a 0.</span>
+          </div>
+        </div>
+        <div class="form-group half">
+          <label for="kilometraje">Kilometraje (km) *</label>
+          <input
+            id="kilometraje"
+            type="number"
+            formControlName="kilometraje"
+            placeholder="45000"
+            class="form-control"
+            [class.is-invalid]="mantenimientoForm.get('kilometraje')?.invalid && mantenimientoForm.get('kilometraje')?.touched"
+          />
+          <div class="error-message" *ngIf="mantenimientoForm.get('kilometraje')?.invalid && mantenimientoForm.get('kilometraje')?.touched">
+            <span *ngIf="mantenimientoForm.get('kilometraje')?.errors?.['required']">El kilometraje es obligatorio.</span>
+            <span *ngIf="mantenimientoForm.get('kilometraje')?.errors?.['min']">El kilometraje debe ser mayor o igual a 0.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="tipo">Tipo de Mantenimiento *</label>
+        <input
+          id="tipo"
+          type="text"
+          formControlName="tipo"
+          placeholder="Cambio de neumáticos, Revisión general, etc."
+          class="form-control"
+          [class.is-invalid]="mantenimientoForm.get('tipo')?.invalid && mantenimientoForm.get('tipo')?.touched"
+        />
+        <div class="error-message" *ngIf="mantenimientoForm.get('tipo')?.invalid && mantenimientoForm.get('tipo')?.touched">
+          <span *ngIf="mantenimientoForm.get('tipo')?.errors?.['required']">El tipo de mantenimiento es obligatorio.</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="descripcion">Descripción *</label>
+        <textarea
+          id="descripcion"
+          formControlName="descripcion"
+          placeholder="Detalles del mantenimiento realizado..."
+          class="form-control"
+          rows="4"
+          [class.is-invalid]="mantenimientoForm.get('descripcion')?.invalid && mantenimientoForm.get('descripcion')?.touched"
+        ></textarea>
+        <div class="error-message" *ngIf="mantenimientoForm.get('descripcion')?.invalid && mantenimientoForm.get('descripcion')?.touched">
+          <span *ngIf="mantenimientoForm.get('descripcion')?.errors?.['required']">La descripción es obligatoria.</span>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="mantenimientoForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>

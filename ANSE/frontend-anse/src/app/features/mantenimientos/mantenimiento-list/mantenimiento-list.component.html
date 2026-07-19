@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="header">
+      <h2>🔧 Mantenimientos</h2>
+      <a *ngIf="isAdmin" routerLink="/mantenimientos/nuevo" class="btn-primary">+ Nuevo Mantenimiento</a>
+    </div>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Vehículo</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Costo</th>
+            <th>Kilometraje</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of mantenimientos">
+            <td>{{ m.id }}</td>
+            <td>{{ m.vehiculoId }}</td>
+            <td>{{ m.fecha }}</td>
+            <td><strong>{{ m.tipo }}</strong></td>
+            <td>{{ m.descripcion | slice:0:50 }}{{ m.descripcion.length > 50 ? '...' : '' }}</td>
+            <td>S/ {{ m.costo }}</td>
+            <td>{{ m.kilometraje }} km</td>
+            <td class="actions-cell">
+              <a *ngIf="isAdmin" [routerLink]="['/mantenimientos/editar', m.id]" class="btn-edit">✏️ Editar</a>
+              <button *ngIf="isAdmin" class="btn-delete" (click)="eliminar(m.id)">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

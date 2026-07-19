@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="header">
+      <h2>🧑‍✈️ Conductores</h2>
+      <a *ngIf="isAdmin" routerLink="/conductores/nuevo" class="btn-primary">+ Nuevo Conductor</a>
+    </div>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Licencia</th>
+            <th>Teléfono</th>
+            <th>Categoría</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of conductores">
+            <td>{{ c.id }}</td>
+            <td>{{ c.nombres }}</td>
+            <td>{{ c.apellidos }}</td>
+            <td>{{ c.licencia }}</td>
+            <td>{{ c.telefono }}</td>
+            <td>{{ c.categoriaLicencia }}</td>
+            <td>
+              <span class="badge" [class.badge-success]="c.estado" [class.badge-danger]="!c.estado">
+                {{ c.estado ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="actions-cell">
+              <a *ngIf="isAdmin" [routerLink]="['/conductores/editar', c.id]" class="btn-edit">✏️ Editar</a>
+              <button *ngIf="isAdmin" class="btn-delete" (click)="eliminar(c.id)">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

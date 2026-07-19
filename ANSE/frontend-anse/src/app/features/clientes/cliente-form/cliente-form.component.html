@@ -1,0 +1,84 @@
+<div class="container">
+    <h2>{{ isEdit ? '✏️ Editar Cliente' : '➕ Nuevo Cliente' }}</h2>
+  
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label for="razonSocial">Razón Social *</label>
+        <input
+          id="razonSocial"
+          type="text"
+          formControlName="razonSocial"
+          placeholder="Nombre de la empresa o persona"
+          class="form-control"
+          [class.is-invalid]="clienteForm.get('razonSocial')?.invalid && clienteForm.get('razonSocial')?.touched"
+        />
+        <div class="error-message" *ngIf="clienteForm.get('razonSocial')?.invalid && clienteForm.get('razonSocial')?.touched">
+          <span *ngIf="clienteForm.get('razonSocial')?.errors?.['required']">La razón social es obligatoria.</span>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="rucDni">RUC o DNI *</label>
+        <input
+          id="rucDni"
+          type="text"
+          formControlName="rucDni"
+          placeholder="Número de identificación fiscal"
+          class="form-control"
+          [class.is-invalid]="clienteForm.get('rucDni')?.invalid && clienteForm.get('rucDni')?.touched"
+        />
+        <div class="error-message" *ngIf="clienteForm.get('rucDni')?.invalid && clienteForm.get('rucDni')?.touched">
+          <span *ngIf="clienteForm.get('rucDni')?.errors?.['required']">El RUC/DNI es obligatorio.</span>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="telefono">Teléfono</label>
+          <input
+            id="telefono"
+            type="text"
+            formControlName="telefono"
+            placeholder="Número de contacto"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group half">
+          <label for="correo">Correo Electrónico</label>
+          <input
+            id="correo"
+            type="email"
+            formControlName="correo"
+            placeholder="correo@empresa.com"
+            class="form-control"
+            [class.is-invalid]="clienteForm.get('correo')?.invalid && clienteForm.get('correo')?.touched"
+          />
+          <div class="error-message" *ngIf="clienteForm.get('correo')?.invalid && clienteForm.get('correo')?.touched">
+            <span *ngIf="clienteForm.get('correo')?.errors?.['email']">Ingrese un correo válido.</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="direccion">Dirección *</label>
+        <input
+          id="direccion"
+          type="text"
+          formControlName="direccion"
+          placeholder="Dirección fiscal"
+          class="form-control"
+          [class.is-invalid]="clienteForm.get('direccion')?.invalid && clienteForm.get('direccion')?.touched"
+        />
+        <div class="error-message" *ngIf="clienteForm.get('direccion')?.invalid && clienteForm.get('direccion')?.touched">
+          <span *ngIf="clienteForm.get('direccion')?.errors?.['required']">La dirección es obligatoria.</span>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+        <button type="submit" class="btn-save" [disabled]="clienteForm.invalid">
+          {{ isEdit ? 'Actualizar' : 'Crear' }}
+        </button>
+      </div>
+    </form>
+  </div>

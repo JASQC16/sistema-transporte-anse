@@ -1,0 +1,47 @@
+<div class="auth-container">
+    <div class="auth-card">
+      <h2>Registrarse</h2>
+      <p class="subtitle">Crea tu cuenta para acceder al sistema</p>
+  
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input
+            id="usuario"
+            type="text"
+            formControlName="usuario"
+            placeholder="Elige un nombre de usuario"
+            class="form-control"
+            [class.is-invalid]="registerForm.get('usuario')?.invalid && registerForm.get('usuario')?.touched"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="contrasenia">Contraseña</label>
+          <input
+            id="contrasenia"
+            type="password"
+            formControlName="contrasenia"
+            placeholder="Mínimo 6 caracteres"
+            class="form-control"
+            [class.is-invalid]="registerForm.get('contrasenia')?.invalid && registerForm.get('contrasenia')?.touched"
+          />
+          <div class="hint" *ngIf="registerForm.get('contrasenia')?.invalid && registerForm.get('contrasenia')?.touched">
+            La contraseña debe tener al menos 6 caracteres.
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+  
+        <button type="submit" class="btn-register" [disabled]="registerForm.invalid">
+          Registrarse
+        </button>
+      </form>
+  
+      <p class="login-link">
+        ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión aquí</a>
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="header">
+      <h2>📋 Categorías de Servicio</h2>
+      <a *ngIf="isAdmin" routerLink="/categorias/nuevo" class="btn-primary">+ Nueva Categoría</a>
+    </div>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of categorias">
+            <td>{{ c.id }}</td>
+            <td><strong>{{ c.nombre }}</strong></td>
+            <td>{{ c.descripcion }}</td>
+            <td class="actions-cell">
+              <a *ngIf="isAdmin" [routerLink]="['/categorias/editar', c.id]" class="btn-edit">✏️ Editar</a>
+              <button *ngIf="isAdmin" class="btn-delete" (click)="eliminar(c.id)">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

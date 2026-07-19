@@ -1,0 +1,25 @@
+<nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/">🚚 ANSE Transporte</a>
+    </div>
+  
+    <div class="nav-links" *ngIf="authService.isLoggedIn()">
+      <a routerLink="/categorias" routerLinkActive="active">Categorías</a>
+      <a routerLink="/clientes" routerLinkActive="active">Clientes</a>
+      <a routerLink="/conductores" routerLinkActive="active">Conductores</a>
+      <a routerLink="/vehiculos" routerLinkActive="active">Vehículos</a>
+      <a routerLink="/rutas" routerLinkActive="active">Rutas</a>
+      <a routerLink="/servicios" routerLinkActive="active">Servicios</a>
+      <a routerLink="/boletas" routerLinkActive="active">Boletas</a>
+      <a routerLink="/mantenimientos" routerLinkActive="active">Mantenimientos</a>
+    </div>
+  
+    <div class="nav-actions">
+      <span *ngIf="authService.isLoggedIn()" class="user-role">
+        {{ authService.isAdmin() ? '👑 Admin' : '👤 Usuario' }}
+      </span>
+      <button *ngIf="authService.isLoggedIn()" class="btn-logout" (click)="logout()">
+        Cerrar Sesión
+      </button>
+    </div>
+  </nav>

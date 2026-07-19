@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="header">
+      <h2>📦 Servicios de Transporte</h2>
+      <a *ngIf="isAdmin" routerLink="/servicios/nuevo" class="btn-primary">+ Nuevo Servicio</a>
+    </div>
+  
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Categoría</th>
+            <th>Ruta</th>
+            <th>Conductor</th>
+            <th>Vehículo</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Costo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of servicios">
+            <td>{{ s.id }}</td>
+            <td>{{ s.clienteId }}</td>
+            <td>{{ s.categoriaId }}</td>
+            <td>{{ s.rutaId }}</td>
+            <td>{{ s.conductorId }}</td>
+            <td>{{ s.vehiculoId }}</td>
+            <td>{{ s.fechaServicio }}</td>
+            <td>
+              <span class="badge" [ngClass]="{
+                'badge-primary': s.estado === 'Programado',
+                'badge-warning': s.estado === 'En Tránsito',
+                'badge-success': s.estado === 'Completado',
+                'badge-danger': s.estado === 'Cancelado'
+              }">
+                {{ s.estado }}
+              </span>
+            </td>
+            <td>S/ {{ s.costo }}</td>
+            <td class="actions-cell">
+              <a *ngIf="isAdmin" [routerLink]="['/servicios/editar', s.id]" class="btn-edit">✏️ Editar</a>
+              <button *ngIf="isAdmin" class="btn-delete" (click)="eliminar(s.id)">🗑️ Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
